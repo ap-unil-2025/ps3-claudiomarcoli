@@ -1,0 +1,6 @@
+3a49d66 Completed bonus exercise
+b47ea83 Fixed problem3
+7134a1d Completed problem2, problem3 and problem4
+2a7e0e8 Add my name and date
+7bcb689 Add GitHub Classroom autograding configuration
+2dc2daa Initial commit
