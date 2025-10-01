@@ -23,23 +23,33 @@ def generate_password(length=12, use_uppercase=True, use_lowercase=True,
         str: Generated password
     """
     characters = ""
+    pools = []
 
-    # TODO: Build character set based on parameters
-    # if use_lowercase:
-    #     characters += string.ascii_lowercase
-    # etc.
+    if use_lowercase:
+        characters += string.ascii_lowercase
+        pools.append(string.ascii_lowercase)
+    if use_uppercase:
+        characters += string.ascii_uppercase
+        pools.append(string.ascii_uppercase)
+    if use_digits:
+        characters += string.digits
+        pools.append(string.digits)
+    if use_special:
+        characters += string.punctuation
+        pools.append(string.punctuation)
 
     if not characters:
         return "Error: No character types selected!"
 
     password = []
 
-    # TODO: Ensure at least one character from each selected type
-    # This prevents passwords that don't meet the criteria
+    for pool in pools:
+        password.append(random.choice(pool))
 
-    # TODO: Fill the rest of the password randomly
+    while len(password) < length:
+        password.append(random.choice(characters))
 
-    # TODO: Shuffle the password list to randomize order
+    random.shuffle(password)
 
     return ''.join(password)
 
@@ -62,6 +72,20 @@ def password_strength(password):
     # - Contains lowercase: +1 point
     # - Contains uppercase: +1 point
     # - Contains digits: +1 point
+
+    length = len(password)
+
+    if length >= 8:
+        score += 1
+    if length >= 12:
+        score += 1
+
+    if any(c.islower() for c in password):
+        score += 1
+    if any(c.isupper() for c in password):
+        score += 1
+    if any(c.isdigit() for c in password):
+        score += 1
 
     strength = ["Very Weak", "Weak", "Fair", "Good", "Strong", "Very Strong"]
     return strength[min(score, 5)]
