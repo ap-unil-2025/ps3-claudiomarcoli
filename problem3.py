@@ -14,11 +14,16 @@ def get_numbers_from_user():
     numbers = []
 
     while True:
-        # TODO: Get input from user
-        # TODO: Check if user typed 'done'
-        # TODO: Try to convert to float and add to list
-        # TODO: Handle invalid input gracefully
-        pass
+        user_input = input("Enter some numbers. When you are done, type 'done' to finish: ")
+
+        if user_input.lower() == "done":
+            break
+
+        try:
+            user_number = float(user_input)      
+            numbers.append(user_number)          
+        except ValueError:
+            print("Invalid input. Try again with a number")
 
     return numbers
 
@@ -44,14 +49,24 @@ def analyze_numbers(numbers):
         return None
 
     analysis = {}
+    analysis["count"] = len(numbers)
+    analysis["sum"] = sum(numbers)
+    analysis["average"] = analysis["sum"] / analysis["count"]
+    analysis["min"] = min(numbers)
+    analysis["max"] = max(numbers)
 
-    # TODO: Calculate count
-    # TODO: Calculate sum
-    # TODO: Calculate average
-    # TODO: Find minimum
-    # TODO: Find maximum
-    # TODO: Count even numbers (hint: use modulo operator)
-    # TODO: Count odd numbers
+    even = 0
+    odd = 0
+    for user_number in numbers:
+        if user_number.is_integer():
+            if int(user_number) % 2 == 0:
+                even = even + 1
+            else:
+                odd = odd + 1
+    
+    analysis["even"] = even
+    analysis["odd"] = odd
+
 
     return analysis
 
@@ -69,13 +84,13 @@ def display_analysis(analysis):
     print("\nAnalysis Results:")
     print("-" * 20)
 
-    # TODO: Display all analysis results in a nice format
-    # Example:
-    # Count: 5
-    # Sum: 25
-    # Average: 5.00
-    # etc.
-    pass
+    print(f"Count: {analysis['count']}")
+    print(f"Sum: {analysis['sum']}")
+    print(f"Average: {analysis['average']:.2f}")
+    print(f"Minimum: {analysis['min']}")
+    print(f"Maximum: {analysis['max']}")
+    print(f"Even numbers: {analysis['even']}")
+    print(f"Odd numbers: {analysis['odd']}")
 
 
 def main():
