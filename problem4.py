@@ -66,7 +66,7 @@ def count_characters(filename, include_spaces=True):
     with open(filename, "r") as f:
         text = f.read()
     if not include_spaces:
-        text = text.replace(" ", "").replace("\n", "")
+        text = text.replace(" ", "").replace("\n", " ")
     return len(text)
 
 def find_longest_word(filename):
@@ -106,13 +106,11 @@ def word_frequency(filename):
     Returns:
         dict: Dictionary with words as keys and frequencies as values
     """
-    import string
-
-    frequency = {}
 
     import string
 
     frequency = {}
+    
     with open(filename, "r") as f:
         text = f.read().lower()
 
